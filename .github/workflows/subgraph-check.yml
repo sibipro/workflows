@@ -17,9 +17,6 @@ on:
         required: false
         type: string
         default: exit 0
-      APOLLO_VCS_COMMIT:
-        required: false
-        type: string
     secrets:
       APOLLO_KEY:
         required: true
@@ -30,7 +27,7 @@ jobs:
     environment: apollo
     env:
       APOLLO_KEY: ${{ secrets.APOLLO_STUDIO_KEY }}
-      APOLLO_VCS_COMMIT: ${{ inputs.APOLLO_VCS_COMMIT }}
+      APOLLO_VCS_COMMIT: ${{ github.event.pull_request.head.sha }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
