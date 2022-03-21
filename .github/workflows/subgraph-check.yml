@@ -1,0 +1,42 @@
+name: Subgraph Check
+
+on:
+  workflow_call:
+    inputs:
+      graph:
+        required: true
+        type: string
+      variant:
+        required: false
+        type: string
+        default: current
+      schema_path:
+        required: true
+        type: string
+      schema_build_cmd:
+        required: false
+        type: string
+        default: exit 0
+      APOLLO_VCS_COMMIT:
+        required: false
+        type: string
+    secrets:
+      APOLLO_KEY:
+        required: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    environment: apollo
+    env:
+      APOLLO_KEY: ${{ secrets.APOLLO_STUDIO_KEY }}
+      APOLLO_VCS_COMMIT: ${{ inputs.APOLLO_VCS_COMMIT }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build Schema
+        run: ${{ inputs.schema_build_cmd }}
+
+      - name:
+        run: npx rover subgraph check ${{ inputs.graph }}@${{ inputs.variant }} --schema ${{ inputs.schema_path }}
