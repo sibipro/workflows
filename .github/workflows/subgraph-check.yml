@@ -40,6 +40,6 @@ jobs:
 
       - name:
         run: |
-          npx rover subgraph check ${{ inputs.graph }}@${{ inputs.variant }} \
+          rover subgraph check ${{ inputs.graph }}@${{ inputs.variant }} \
           --schema ${{ inputs.schema_path }} \
           --name ${{ inputs.name }}
