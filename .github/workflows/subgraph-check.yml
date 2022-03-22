@@ -27,10 +27,8 @@ on:
 jobs:
   check:
     runs-on: ubuntu-latest
-    environment: apollo
     env:
       APOLLO_KEY: ${{ secrets.APOLLO_KEY }}
-      APOLLO_VCS_COMMIT: ${{ github.event.pull_request.head.sha }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -39,9 +37,6 @@ jobs:
         run: |
           curl -sSL https://rover.apollo.dev/nix/v0.4.1 | sh
           echo "$HOME/.rover/bin" >> $GITHUB_PATH
-
-      - name: Check if rover can authenticate
-        run: rover config whoami
 
       - name: Build Schema
         run: ${{ inputs.schema_build_cmd }}
