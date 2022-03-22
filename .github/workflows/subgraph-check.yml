@@ -35,6 +35,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Install Rover
+        run: |
+          curl -sSL https://rover.apollo.dev/nix/v0.1.0 | sh
+          echo "$HOME/.rover/bin" >> $GITHUB_PATH
+
       - name: Build Schema
         run: ${{ inputs.schema_build_cmd }}
 
