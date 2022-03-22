@@ -10,6 +10,9 @@ on:
         required: false
         type: string
         default: current
+      name:
+        required: true
+        type: string
       schema_path:
         required: true
         type: string
@@ -36,4 +39,7 @@ jobs:
         run: ${{ inputs.schema_build_cmd }}
 
       - name:
-        run: npx rover subgraph check ${{ inputs.graph }}@${{ inputs.variant }} --schema ${{ inputs.schema_path }}
+        run: |
+          npx rover subgraph check ${{ inputs.graph }}@${{ inputs.variant }} \
+          --schema ${{ inputs.schema_path }} \
+          --name ${{ inputs.name }}
