@@ -27,7 +27,6 @@ on:
 jobs:
   check:
     runs-on: ubuntu-latest
-    environment: apollo
     env:
       APOLLO_KEY: ${{ secrets.APOLLO_KEY }}
     steps:
