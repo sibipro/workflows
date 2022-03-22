@@ -40,6 +40,9 @@ jobs:
           curl -sSL https://rover.apollo.dev/nix/v0.4.1 | sh
           echo "$HOME/.rover/bin" >> $GITHUB_PATH
 
+      - name: Check if rover can authenticate
+        run: rover config whoami
+
       - name: Build Schema
         run: ${{ inputs.schema_build_cmd }}
 
