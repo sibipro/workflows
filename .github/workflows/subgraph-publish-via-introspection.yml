@@ -36,7 +36,7 @@ jobs:
 
       - name:
         run: |
-          rover graph introspect ${{ inputs.introspection_url }} |
+          rover subgraph introspect ${{ inputs.introspection_url }} |
           rover subgraph publish ${{ inputs.graph }}@${{ inputs.variant }} \
           --schema - \
           --name ${{ inputs.name }}
