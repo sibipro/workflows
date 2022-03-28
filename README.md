@@ -9,7 +9,7 @@ Checks a subgraph for breaking changes
 ```
 jobs:
   subgraph_check:
-    uses: sibipro/workflows/.github/workflows/subgraph-check.yml@main
+    uses: sibipro/workflows/.github/workflows/subgraph-check.yml@v1
     with:
       graph: my-federated-graph
 
