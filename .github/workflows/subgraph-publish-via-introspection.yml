@@ -1,0 +1,42 @@
+name: Subgraph Check
+
+on:
+  workflow_call:
+    inputs:
+      graph:
+        required: true
+        type: string
+      variant:
+        required: false
+        type: string
+        default: current
+      name:
+        required: true
+        type: string
+      introspection_url:
+        required: true
+        type: string
+    secrets:
+      APOLLO_KEY:
+        required: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    env:
+      APOLLO_KEY: ${{ secrets.APOLLO_KEY }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install Rover
+        run: |
+          curl -sSL https://rover.apollo.dev/nix/v0.4.1 | sh
+          echo "$HOME/.rover/bin" >> $GITHUB_PATH
+
+      - name:
+        run: |
+          rover graph introspect ${{ inputs.introspection_url }} |
+          rover subgraph publish ${{ inputs.graph }}@${{ inputs.variant }} \
+          --schema - \
+          --name ${{ inputs.name }}
