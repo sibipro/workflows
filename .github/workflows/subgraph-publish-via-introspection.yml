@@ -1,4 +1,4 @@
-name: Subgraph Check
+name: Subgraph Publish via Introspection
 
 on:
   workflow_call:
