@@ -3,26 +3,26 @@ name: Deploy Image to ECS Service
 on:
   workflow_call:
     inputs:
-        task_definition:
-          required: true
-          type: string
-        image:
-          required: true
-          type: string
-        container_name:
-          required: true
-          type: string
-        service:
-          required: true
-          type: string
-        cluster:
-          required: true
-          type: string
-      secrets:
-        AWS_ACCESS_KEY_ID:
-          required: true
-        AWS_SECRET_ACCESS_KEY:
-          required: true
+      task_definition:
+        required: true
+        type: string
+      image:
+        required: true
+        type: string
+      container_name:
+        required: true
+        type: string
+      service:
+        required: true
+        type: string
+      cluster:
+        required: true
+        type: string
+    secrets:
+      AWS_ACCESS_KEY_ID:
+        required: true
+      AWS_SECRET_ACCESS_KEY:
+        required: true
 
 jobs:
   deploy_image_to_ecs_service:
@@ -44,7 +44,7 @@ jobs:
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
           task-definition: ${{ inputs.task_definition }}
-          container-name:  ${{ inputs.container_name }}
+          container-name: ${{ inputs.container_name }}
           image: ${{ inputs.image }}
 
       - name: Deploy Amazon ECS task definition
