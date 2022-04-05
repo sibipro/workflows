@@ -1,4 +1,4 @@
-name: Deploy Image
+name: Deploy Image to ECS Service
 
 on:
   workflow_call:
@@ -25,7 +25,7 @@ on:
         required: true
 
 jobs:
-  deploy_image:
+  deploy_image_to_ecs_service:
     name: Deploy Docker image to ECS
     runs-on: ubuntu-latest
     steps:
