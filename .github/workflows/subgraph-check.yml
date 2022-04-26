@@ -41,7 +41,7 @@ jobs:
       - name: Build Schema
         run: ${{ inputs.schema_build_cmd }}
 
-      - name:
+      - name: Check Schema
         run: |
           rover subgraph check ${{ inputs.graph }}@${{ inputs.variant }} \
           --schema ${{ inputs.schema_path }} \
