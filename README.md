@@ -24,6 +24,28 @@ jobs:
       APOLLO_KEY: ${{ secrets.APOLLO_KEY }}
 ```
 
+## Subgraph Publish
+
+Publishes a subgraph schema from a file
+
+```yml
+jobs:
+  subgraph_publish:
+    uses: sibipro/workflows/.github/workflows/subgraph-publish.yml@v1.1
+    with:
+      graph: my-federated-graph
+      name: my-subgraph
+      schema_path: ./schema.graphql
+
+      # Optionally pass the graph variant to check against (default: current)
+      variant: current
+
+      # Optionally pass a command to compile multiple `.graphql` files into a single schema file
+      schema_build_cmd: cat ./graphql/*.graphql > schema.graphql
+    secrets:
+      APOLLO_KEY: ${{ secrets.APOLLO_KEY }}
+```
+
 ## Subgraph Publish via Introspection
 
 Publishes a subgraph schema by introspecting the running subgraph.
