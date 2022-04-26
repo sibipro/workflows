@@ -2,51 +2,53 @@
 
 Reusable workflows for CI/CD
 
-### Subgraph Check
+## Subgraph Check
 
 Checks a subgraph for breaking changes
 
-```
+```yml
 jobs:
   subgraph_check:
     uses: sibipro/workflows/.github/workflows/subgraph-check.yml@v1.1
     with:
       graph: my-federated-graph
-
-      // The path to a single graphql schema file
+      name: my-subgraph
       schema_path: ./schema.graphql
 
-      // Optionally pass a command to compile multiple `.graphql` files into a single schema file
-      schema_build_cmd: cat ./graphql/*.graphql > schema.graphql
+      # Optionally pass the graph variant to check against (default: current)
+      variant: current
 
-      // The URL that your gateway uses to communicate with the subgraph in a managed federation architecture.
-      routing_url: http://my-subgraph.com
+      # Optionally pass a command to compile multiple `.graphql` files into a single schema file
+      schema_build_cmd: cat ./graphql/*.graphql > schema.graphql
     secrets:
       APOLLO_KEY: ${{ secrets.APOLLO_KEY }}
 ```
 
-### Subgraph Publish via Introspection
+## Subgraph Publish via Introspection
 
 Publishes a subgraph schema by introspecting the running subgraph.
 
-```
+```yml
 jobs:
-  schema-push-users-service:
-    name: Run Subgraph Publish
+  subgraph_publish:
+    name: Run Subgraph Introspect and Publish
     uses: sibipro/workflows/.github/workflows/subgraph-publish-via-introspection.yml@v1.1
     with:
       graph: my-federated-graph
       name: my-subgraph-name
       introspection_url: http://my-subgraph.com
+
+      # Optionally pass the graph variant to check against (default: current)
+      variant: current
     secrets:
       APOLLO_KEY: ${{ secrets.APOLLO_STUDIO_KEY }}
 ```
 
-### Deploy image to ECS service
+## Deploy image to ECS service
 
 Updates a services's task definition with a new image and redeploys that service
 
-```
+```yml
 jobs:
   deploy:
     name: Deploy
