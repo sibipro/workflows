@@ -9,7 +9,7 @@ Checks a subgraph for breaking changes
 ```yml
 jobs:
   subgraph_check:
-    uses: sibipro/workflows/.github/workflows/subgraph-check.yml@v1.2
+    uses: sibipro/workflows/.github/workflows/subgraph-check.yml@v1.3
     with:
       graph: my-federated-graph
       name: my-subgraph
@@ -31,7 +31,7 @@ Publishes a subgraph schema from a file
 ```yml
 jobs:
   subgraph_publish:
-    uses: sibipro/workflows/.github/workflows/subgraph-publish.yml@v1.2
+    uses: sibipro/workflows/.github/workflows/subgraph-publish.yml@v1.3
     with:
       graph: my-federated-graph
       name: my-subgraph
@@ -54,7 +54,7 @@ Publishes a subgraph schema by introspecting the running subgraph.
 jobs:
   subgraph_publish:
     name: Run Subgraph Introspect and Publish
-    uses: sibipro/workflows/.github/workflows/subgraph-publish-via-introspection.yml@v1.2
+    uses: sibipro/workflows/.github/workflows/subgraph-publish-via-introspection.yml@v1.3
     with:
       graph: my-federated-graph
       name: my-subgraph-name
@@ -74,7 +74,7 @@ Updates a services's task definition with a new image and redeploys that service
 jobs:
   deploy:
     name: Deploy
-    uses: sibipro/workflows/.github/workflows/deploy-image-to-ecs-service.yml@v1.2
+    uses: sibipro/workflows/.github/workflows/deploy-image-to-ecs-service.yml@v1.3
     with:
       task_definition: task-definition.json
       container_name: my-container-name
